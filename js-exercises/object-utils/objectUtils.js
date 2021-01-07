@@ -2,9 +2,9 @@
 
 const map = (obj, callbackFunction) => {
   const paramTypeValue = typeof obj;
-  if (paramTypeValue !== 'object' || obj.length < 1) {
+  if (paramTypeValue !== "object" || obj.length < 1) {
     throw new TypeError(
-      `Received ${paramTypeValue}, expecting an object with minimum one key-value pair.`,
+      `Received ${paramTypeValue}, expecting an object with minimum one key-value pair.`
     );
   }
 
@@ -18,9 +18,9 @@ const map = (obj, callbackFunction) => {
 
 const filter = (obj, callbackFunction) => {
   const paramTypeValue = typeof obj;
-  if (paramTypeValue !== 'object' || obj.length < 1) {
+  if (paramTypeValue !== "object" || obj.length < 1) {
     throw new TypeError(
-      `Received ${paramTypeValue}, expecting an object with minimum one key-value pair.`,
+      `Received ${paramTypeValue}, expecting an object with minimum one key-value pair.`
     );
   }
   const resultantObj = {};
@@ -35,9 +35,9 @@ const filter = (obj, callbackFunction) => {
 
 const invert = (obj) => {
   const paramTypeValue = typeof obj;
-  if (paramTypeValue !== 'object' || obj.length < 1) {
+  if (paramTypeValue !== "object" || obj.length < 1) {
     throw new TypeError(
-      `Received ${paramTypeValue}, expecting an object with minimum one key-value pair.`,
+      `Received ${paramTypeValue}, expecting an object with minimum one key-value pair.`
     );
   }
   const resultantObj = {};
@@ -47,9 +47,50 @@ const invert = (obj) => {
   return resultantObj;
 };
 
-const merge = () => {};
-const all = () => {};
-const some = () => {};
+const merge = (...objs) => {
+  let resultantObj = {};
+  for (const obj of objs) {
+    const paramTypeValue = typeof obj;
+    if (paramTypeValue !== "object" || obj.length < 1) {
+      throw new TypeError(
+        `Received ${paramTypeValue} in the objects, expecting all values as objects with minimum one key-value pair.`
+      );
+    }
+
+    resultantObj = { ...resultantObj, ...obj };
+  }
+  return resultantObj;
+};
+
+const all = (obj, callbackFunction) => {
+  const paramTypeValue = typeof obj;
+  if (paramTypeValue !== "object" || obj.length < 1) {
+    throw new TypeError(
+      `Received ${paramTypeValue}, expecting an object with minimum one key-value pair.`
+    );
+  }
+  for (const key of Object.keys(obj)) {
+    if (!callbackFunction([key, obj[key]])) {
+      return false;
+    }
+  }
+  return true;
+};
+
+const some = (obj, callbackFunction) => {
+  const paramTypeValue = typeof obj;
+  if (paramTypeValue !== "object" || obj.length < 1) {
+    throw new TypeError(
+      `Received ${paramTypeValue}, expecting an object with minimum one key-value pair.`
+    );
+  }
+  for (const key of Object.keys(obj)) {
+    if (callbackFunction([key, obj[key]])) {
+      return true;
+    }
+  }
+  return false;
+};
 
 export {
   map, filter, invert, merge, all, some,
