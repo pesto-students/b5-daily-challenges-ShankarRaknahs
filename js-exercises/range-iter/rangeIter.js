@@ -49,7 +49,7 @@ function rangeIter(lb, ub, step = 1) {
     };
   }
 
-  return rangeIterator;
+  return [...rangeIterator];
 }
 
 export { rangeIter };
