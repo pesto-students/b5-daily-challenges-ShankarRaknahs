@@ -53,4 +53,13 @@ describe('curry', () => {
     const firstThree = firstTwo(5);
     expect(firstThree(6)).toBe(14);
   });
+  // test("doesn't share state between inner calls", () => {
+  //   const add = curry((a, b, c, d) => {
+  //     return a + b + c + d;
+  //   });
+  //   const firstTwo = add(1)(2);
+  //   expect(firstTwo(3)(4)).toBe(10);
+  //   const firstThree = firstTwo(5);
+  //   expect(firstThree(6)).toBe(14);
+  // });
 });
